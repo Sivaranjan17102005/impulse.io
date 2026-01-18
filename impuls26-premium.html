@@ -1,0 +1,1312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>IMPULS '26 | RMK Engineering College</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    /* ---------- RESET ---------- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: #010405;
+      color: rgb(31, 29, 29);
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* ---------- FLOATING MENU ---------- */
+    .menu-btn {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      z-index: 1000;
+      background: linear-gradient(135deg, #facc15, #eab308);
+      border: none;
+      border-radius: 50%;
+      padding: 14px;
+      cursor: pointer;
+      font-size: 18px;
+      box-shadow: 0 8px 32px rgba(250, 204, 21, 0.4);
+      transition: all 0.3s ease;
+    }
+
+    .menu-btn:hover.stars {
+      transform: scale(1.1);
+      box-shadow: 0 12px 40px rgba(250, 204, 21, 0.6);
+    }
+
+    .menu {
+      position: fixed;
+      top: 80px;
+      right: 16px;
+      background: rgba(80, 85, 95, 0.95);
+      backdrop-filter: blur(20px);
+      border: 2px solid rgba(202, 138, 4, 0.5);
+      border-radius: 12px;
+      display: none;
+      flex-direction: column;
+      z-index: 1000;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    }
+
+    .menu button {
+      background: none;
+      border: none;
+      color: #ccc;
+      padding: 14px 24px;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.3s ease;
+    }
+
+    .menu button:hover {
+      background: rgba(234,179,8,0.2);
+      color: #facc15;
+    }
+
+    /* ---------- HERO ---------- */
+    .hero {
+      min-height: 100vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+      background: radial-gradient(ellipse at center, #1a1a1a 0%, #000 100%);
+    }
+
+    .hero video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.4;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, black, transparent, black);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 1000px;
+      animation: fadeInUp 1s ease-out;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      background: linear-gradient(90deg, #fde68a, #facc15, #eab308);
+      -webkit-background-clip: text;
+      color: transparent;
+      margin-bottom: 10px;
+    }
+
+    .hero h2 {
+      font-size: clamp(3rem, 6vw, 5rem);
+      color: #facc15;
+      margin: 30px 0;
+    }
+
+    .department {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      color: #facc15;
+      font-weight: bold;
+      margin-bottom: 15px;
+      letter-spacing: 3px;
+      text-shadow: 
+        0 0 10px rgba(250, 204, 21, 0.8),
+        0 0 10px rgba(250, 204, 21, 0.6),
+        0 0 30px rgba(234, 179, 8, 0.4),
+        2px 2px 4px rgba(0, 0, 0, 0.8);
+      background: linear-gradient(90deg, #fde68a, #facc15, #eab308, #facc15, #fde68a);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    @keyframes shine {
+      0% {
+        background-position: 200% center;
+      }
+      50% {
+        background-position: -200% center;
+      }
+      100% {
+        background-position: 200% center;
+      }
+    }
+
+    .date {
+      font-size: 2rem;
+      color: #facc15;
+      margin-bottom: 20px;
+    }
+
+    /* ---------- COUNTDOWN ---------- */
+    .countdown {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin: 30px auto;
+      max-width: 500px;
+    }
+
+    .time-box {
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(10px);
+      border-radius: 8px;
+      padding: 14px;
+      border: 1px solid rgba(250, 204, 21, 0.2);
+    }
+
+    .time-box div {
+      font-size: 1.8rem;
+      color: #facc15;
+    }
+
+    .time-box span {
+      font-size: 0.7rem;
+      color: #aaa;
+    }
+
+    /* ---------- BUTTON ---------- */
+    .btn {
+      padding: 14px 40px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #facc15, #eab308);
+      color: black;
+      font-weight: bold;
+      font-size: 1.1rem;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 8px 32px rgba(250, 204, 21, 0.4);
+      transition: all 0.3s ease;
+    }
+
+    .btn:hover .stars {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(250, 204, 21, 0.6);
+    }
+
+    /* ---------- SECTION TRANSITIONS ---------- */
+    section {
+      min-height: 100vh;
+      padding: 80px 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(50px);
+      transition: opacity 1s ease-out, transform 1s ease-out;
+    }
+
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Glossy overlay effect */
+    section::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.05) 0%,
+        transparent 50%,
+        rgba(255, 255, 255, 0.03) 100%
+      );
+      pointer-events: none;
+    }
+
+    /* Animated gradient orbs */
+    section::after {
+      content: "";
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      filter: blur(100px);
+      opacity: 0.3;
+      animation: float 20s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translate(0, 0) scale(1);
+      }
+      33% {
+        transform: translate(100px, -100px) scale(1.1);
+      }
+      66% {
+        transform: translate(-100px, 100px) scale(0.9);
+      }
+    }
+
+    /* ---------- EVENTS SECTION ---------- */
+    #events {
+      background: 
+        radial-gradient(ellipse at top left, rgba(85, 208, 190, 0.2) 0%, transparent 50%),
+        radial-gradient(ellipse at bottom right, rgba(139, 92, 246, 0.2) 0%, transparent 50%),
+        linear-gradient(135deg, #000000 0%, #262b25 25%, #0c8c10 50%, #a01d2a 75%, #1d1e21 100%);
+      position: relative;
+    }
+
+    #events::after {
+      background: radial-gradient(circle, rgba(81, 246, 59, 0.3) 0%, transparent 70%);
+      top: -250px;
+      right: -250px;
+    }
+
+     /* ---------- REGISTER SECTION ---------- */
+    #register {
+      background: 
+        radial-gradient(ellipse at top right, rgba(34, 197, 94, 0.2) 0%, transparent 50%),
+        radial-gradient(ellipse at bottom left, rgba(20, 184, 166, 0.2) 0%, transparent 50%),
+        linear-gradient(135deg, #363a3f 0%, #4a4f57 25%, #5e646d 50%, #4a4f57 75%, #363a3f 100%);
+      position: relative;
+    }
+
+    /* Animated gradient orb for register */
+    #register .orb {
+      content: "";
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      filter: blur(100px);
+      opacity: 0.3;
+      animation: float 20s ease-in-out infinite;
+      pointer-events: none;
+      z-index: 0;
+      background: radial-gradient(circle, rgba(34, 197, 94, 0.3) 0%, transparent 70%);
+      bottom: -250px;
+      left: -250px;
+    }
+
+    /* 3D Registration Title */
+    .registration-title {
+      font-size: clamp(3rem, 6vw, 5rem);
+      text-align: center;
+      margin-bottom: 15px;
+      perspective: 1000px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .registration-title span {
+      display: inline-block;
+      color: #facc15;
+      font-weight: bold;
+      text-shadow:
+        2px 2px 0px rgba(0, 0, 0, 0.3),
+        4px 4px 0px rgba(0, 0, 0, 0.2),
+        6px 6px 0px rgba(0, 0, 0, 0.1),
+        0 0 30px rgba(250, 204, 21, 0.5),
+        0 0 50px rgba(250, 204, 21, 0.3);
+      transition: transform 0.3s ease, text-shadow 0.3s ease;
+      cursor: default;
+      margin: 0 5px;
+    }
+
+    .registration-title span:hover {
+      transform: translateY(-20px) rotateX(15deg) scale(1.2);
+      text-shadow:
+        3px 3px 0px rgba(0, 0, 0, 0.4),
+        6px 6px 0px rgba(0, 0, 0, 0.3),
+        9px 9px 0px rgba(0, 0, 0, 0.2),
+        0 0 40px rgba(250, 204, 21, 0.7),
+        0 0 70px rgba(250, 204, 21, 0.5);
+    }
+
+    /* Subtitle */
+    .registration-subtitle {
+      font-size: 1.5rem;
+      color: #fff;
+      text-align: center;
+      margin-bottom: 40px;
+      position: relative;
+      z-index: 2;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    }
+
+    /* Main Registration Box */
+    .registration-box {
+      max-width: 700px;
+      width: 100%;
+      background: 
+        linear-gradient(145deg, rgba(95, 100, 110, 0.4), rgba(70, 75, 85, 0.5));
+      backdrop-filter: blur(20px);
+      border: 2px solid rgba(250, 204, 21, 0.4);
+      border-radius: 24px;
+      padding: 40px;
+      position: relative;
+      z-index: 2;
+      box-shadow:
+        0 0 40px rgba(250, 204, 21, 0.3),
+        0 0 80px rgba(34, 197, 94, 0.2),
+        inset 0 0 30px rgba(255, 255, 255, 0.05);
+    }
+
+    .registration-box::before {
+      content: "";
+      position: absolute;
+      inset: -2px;
+      border-radius: 24px;
+      background: linear-gradient(
+        45deg,
+        rgba(250, 204, 21, 0.5),
+        rgba(34, 197, 94, 0.5),
+        rgba(59, 130, 246, 0.5),
+        rgba(250, 204, 21, 0.5)
+      );
+      background-size: 300% 300%;
+      animation: gradientBorder 4s ease infinite;
+      z-index: -1;
+      filter: blur(8px);
+    }
+
+    @keyframes gradientBorder {
+      0%, 100% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+    }
+
+    /* Deadline Box */
+    .deadline-box {
+      background: 
+        linear-gradient(135deg, rgba(220, 38, 38, 0.3), rgba(185, 28, 28, 0.4));
+      border: 3px solid rgba(239, 68, 68, 0.6);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 25px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow:
+        0 0 30px rgba(239, 68, 68, 0.4),
+        inset 0 0 20px rgba(255, 255, 255, 0.1);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    .deadline-box::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+      );
+      transform: translateX(-100%);
+      animation: shine 3s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        box-shadow:
+          0 0 30px rgba(239, 68, 68, 0.4),
+          inset 0 0 20px rgba(255, 255, 255, 0.1);
+      }
+      50% {
+        box-shadow:
+          0 0 50px rgba(239, 68, 68, 0.6),
+          inset 0 0 30px rgba(255, 255, 255, 0.15);
+      }
+    }
+
+    @keyframes shine {
+      0% {
+        transform: translateX(-100%);
+      }
+      100% {
+        transform: translateX(100%);
+      }
+    }
+
+    .deadline-text {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #fca5a5;
+      text-shadow: 
+        0 0 10px rgba(239, 68, 68, 0.8),
+        0 0 20px rgba(239, 68, 68, 0.5);
+      margin: 0;
+    }
+
+    /* Opportunity Text */
+    .opportunity-text {
+      font-size: 1.1rem;
+      color: #d1d5db;
+      text-align: center;
+      margin-bottom: 30px;
+      line-height: 1.6;
+    }
+
+    /* Register Button Container */
+    .btn-container {
+      text-align: center;
+      margin: 30px 0;
+    }
+
+    /* What Happens Next Box */
+    .next-steps-box {
+      background: 
+        linear-gradient(145deg, rgba(85, 90, 100, 0.4), rgba(60, 65, 75, 0.5));
+      backdrop-filter: blur(15px);
+      border: 2px solid rgba(34, 197, 94, 0.4);
+      border-radius: 20px;
+      padding: 30px;
+      margin-top: 30px;
+      box-shadow:
+        0 0 30px rgba(34, 197, 94, 0.2),
+        inset 0 0 20px rgba(255, 255, 255, 0.05);
+    }
+
+    .next-steps-title {
+      font-size: 2rem;
+      color: #34d399;
+      text-align: center;
+      margin-bottom: 25px;
+      font-weight: bold;
+      text-shadow: 
+        0 0 15px rgba(34, 197, 94, 0.6),
+        0 0 30px rgba(34, 197, 94, 0.3);
+    }
+
+    .steps-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .steps-list li {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 20px;
+      padding: 15px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      border-left: 4px solid #34d399;
+      transition: all 0.3s ease;
+    }
+
+    .steps-list li:hover {
+      background: rgba(255, 255, 255, 0.1);
+      transform: translateX(10px);
+      box-shadow: 0 0 20px rgba(34, 197, 94, 0.3);
+    }
+
+    .step-number {
+      flex-shrink: 0;
+      width: 35px;
+      height: 35px;
+      background: linear-gradient(135deg, #34d399, #10b981);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      color: #000;
+      margin-right: 15px;
+      box-shadow: 0 0 15px rgba(34, 197, 94, 0.5);
+    }
+
+    .step-text {
+      flex: 1;
+      color: #e5e7eb;
+      line-height: 1.6;
+      font-size: 1rem;
+    }
+
+    @media (max-width: 768px) {
+      .registration-box {
+        padding: 30px 20px;
+      }
+
+      .deadline-text {
+        font-size: 1.4rem;
+      }
+
+      .next-steps-title {
+        font-size: 1.6rem;
+      }
+
+      .registration-title {
+        font-size: 2.5rem;
+      }
+    }
+
+    /* ---------- ROUTE SECTION ---------- */
+    #route {
+      background: 
+        radial-gradient(ellipse at center, rgba(250, 204, 21, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at bottom, rgba(234, 179, 8, 0.15) 0%, transparent 50%),
+        linear-gradient(135deg, #3a3d42 0%, #4f5359 25%, #696e75 50%, #4f5359 75%, #3a3d42 100%);
+      position: relative;
+    }
+
+    #route::after {
+      background: radial-gradient(circle, rgba(250, 204, 21, 0.25) 0%, transparent 70%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    section h2 {
+      text-align: center;
+      font-size: 3rem;
+      margin-bottom: 20px;
+      color: #facc15;
+      position: relative;
+      z-index: 2;
+      text-shadow: 0 0 20px rgba(250, 204, 21, 0.5);
+    }
+
+    section p {
+      text-align: center;
+      color: #aaa;
+      margin-bottom: 50px;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* ---------- EVENTS ---------- */
+    .events {
+      position: relative;
+      width: 100%;
+      height: 600px;
+      max-width: 1200px;
+      margin: 60px auto;
+      perspective: 1200px;
+      z-index: 2;
+    }
+
+    .carousel-container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      animation: carouselRotate 20s linear infinite;
+    }
+
+    @keyframes carouselRotate {
+      from {
+        transform: rotateX(-10deg) rotateY(0deg);
+      }
+      to {
+        transform: rotateX(-10deg) rotateY(360deg);
+      }
+    }
+
+    /* Pause rotation on hover */
+    .carousel-container:hover {
+      animation-play-state: paused;
+    }
+
+    /* ---------- PREMIUM EVENT CARDS ---------- */
+    .card {
+      position: absolute;
+      width: 320px;
+      height: 420px;
+      left: 50%;
+      top: 50%;
+      margin-left: -160px;
+      margin-top: -210px;
+      transform-style: preserve-3d;
+      cursor: pointer;
+      transition: transform 0.6s ease;
+    }
+
+    /* Position each card in 3D circle */
+    .card:nth-child(1) {
+      transform: rotateY(0deg) translateZ(500px);
+    }
+    .card:nth-child(2) {
+      transform: rotateY(72deg) translateZ(500px);
+    }
+    .card:nth-child(3) {
+      transform: rotateY(144deg) translateZ(500px);
+    }
+    .card:nth-child(4) {
+      transform: rotateY(216deg) translateZ(500px);
+    }
+    .card:nth-child(5) {
+      transform: rotateY(288deg) translateZ(500px);
+    }
+
+    .card-inner {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.6s ease;
+    }
+
+    /* Flipped state - keeps position while flipping */
+    .card.flipped .card-inner {
+      transform: rotateY(180deg);
+    }
+
+    /* Neon glow colors for each card */
+    .card:nth-child(1) .card-face {
+      box-shadow:
+        0 0 20px rgba(168, 85, 247, 0.4),
+        0 0 40px rgba(168, 85, 247, 0.3),
+        0 0 60px rgba(168, 85, 247, 0.2),
+        inset 0 0 20px rgba(192, 192, 192, 0.15);
+      animation: glowPurple 3s ease-in-out infinite;
+    }
+
+    .card:nth-child(2) .card-face {
+      box-shadow:
+        0 0 20px rgba(59, 130, 246, 0.4),
+        0 0 40px rgba(59, 130, 246, 0.3),
+        0 0 60px rgba(59, 130, 246, 0.2),
+        inset 0 0 20px rgba(192, 192, 192, 0.15);
+      animation: glowBlue 3s ease-in-out infinite;
+    }
+
+    .card:nth-child(3) .card-face {
+      box-shadow:
+        0 0 20px rgba(20, 184, 166, 0.4),
+        0 0 40px rgba(20, 184, 166, 0.3),
+        0 0 60px rgba(20, 184, 166, 0.2),
+        inset 0 0 20px rgba(192, 192, 192, 0.15);
+      animation: glowTeal 3s ease-in-out infinite;
+    }
+
+    .card:nth-child(4) .card-face {
+      box-shadow:
+        0 0 20px rgba(217, 70, 239, 0.4),
+        0 0 40px rgba(217, 70, 239, 0.3),
+        0 0 60px rgba(217, 70, 239, 0.2),
+        inset 0 0 20px rgba(192, 192, 192, 0.15);
+      animation: glowFuchsia 3s ease-in-out infinite;
+    }
+
+    .card:nth-child(5) .card-face {
+      box-shadow:
+        0 0 20px rgba(249, 115, 22, 0.4),
+        0 0 40px rgba(249, 115, 22, 0.3),
+        0 0 60px rgba(249, 115, 22, 0.2),
+        inset 0 0 20px rgba(192, 192, 192, 0.15);
+      animation: glowOrange 3s ease-in-out infinite;
+    }
+
+    /* Pulsing glow animations */
+    @keyframes glowPurple {
+      0%, 100% {
+        box-shadow:
+          0 0 20px rgba(168, 85, 247, 0.4),
+          0 0 40px rgba(168, 85, 247, 0.3),
+          0 0 60px rgba(168, 85, 247, 0.2),
+          inset 0 0 20px rgba(192, 192, 192, 0.15);
+      }
+      50% {
+        box-shadow:
+          0 0 30px rgba(168, 85, 247, 0.6),
+          0 0 60px rgba(168, 85, 247, 0.5),
+          0 0 90px rgba(168, 85, 247, 0.3),
+          inset 0 0 30px rgba(192, 192, 192, 0.2);
+      }
+    }
+
+    @keyframes glowBlue {
+      0%, 100% {
+        box-shadow:
+          0 0 20px rgba(59, 130, 246, 0.4),
+          0 0 40px rgba(59, 130, 246, 0.3),
+          0 0 60px rgba(59, 130, 246, 0.2),
+          inset 0 0 20px rgba(192, 192, 192, 0.15);
+      }
+      50% {
+        box-shadow:
+          0 0 30px rgba(59, 130, 246, 0.6),
+          0 0 60px rgba(59, 130, 246, 0.5),
+          0 0 90px rgba(59, 130, 246, 0.3),
+          inset 0 0 30px rgba(192, 192, 192, 0.2);
+      }
+    }
+
+    @keyframes glowTeal {
+      0%, 100% {
+        box-shadow:
+          0 0 20px rgba(20, 184, 166, 0.4),
+          0 0 40px rgba(20, 184, 166, 0.3),
+          0 0 60px rgba(20, 184, 166, 0.2),
+          inset 0 0 20px rgba(192, 192, 192, 0.15);
+      }
+      50% {
+        box-shadow:
+          0 0 30px rgba(20, 184, 166, 0.6),
+          0 0 60px rgba(20, 184, 166, 0.5),
+          0 0 90px rgba(20, 184, 166, 0.3),
+          inset 0 0 30px rgba(192, 192, 192, 0.2);
+      }
+    }
+
+    @keyframes glowFuchsia {
+      0%, 100% {
+        box-shadow:
+          0 0 20px rgba(217, 70, 239, 0.4),
+          0 0 40px rgba(217, 70, 239, 0.3),
+          0 0 60px rgba(217, 70, 239, 0.2),
+          inset 0 0 20px rgba(192, 192, 192, 0.15);
+      }
+      50% {
+        box-shadow:
+          0 0 30px rgba(217, 70, 239, 0.6),
+          0 0 60px rgba(217, 70, 239, 0.5),
+          0 0 90px rgba(217, 70, 239, 0.3),
+          inset 0 0 30px rgba(192, 192, 192, 0.2);
+      }
+    }
+
+    @keyframes glowOrange {
+      0%, 100% {
+        box-shadow:
+          0 0 20px rgba(249, 115, 22, 0.4),
+          0 0 40px rgba(249, 115, 22, 0.3),
+          0 0 60px rgba(249, 115, 22, 0.2),
+          inset 0 0 20px rgba(192, 192, 192, 0.15);
+      }
+      50% {
+        box-shadow:
+          0 0 30px rgba(249, 115, 22, 0.6),
+          0 0 60px rgba(249, 115, 22, 0.5),
+          0 0 90px rgba(249, 115, 22, 0.3),
+          inset 0 0 30px rgba(192, 192, 192, 0.2);
+      }
+    }
+
+    .card-face {
+      position: absolute;
+      inset: 0;
+      backface-visibility: hidden;
+      border-radius: 18px;
+      padding: 20px;
+      background: 
+        linear-gradient(145deg, rgb(188, 173, 6), rgba(0, 0, 0, 0.9));
+      backdrop-filter: blur(10px);
+      border: 2px solid rgba(250,204,21,0.35);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .card-back {
+      transform: rotateY(180deg);
+      background: 
+        linear-gradient(145deg, rgba(7, 8, 8, 0.9), rgba(5, 5, 6, 0.95));
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .events {
+        height: 500px;
+        perspective: 900px;
+      }
+
+      .card {
+        width: 240px;
+        height: 320px;
+        margin-left: -120px;
+        margin-top: -160px;
+      }
+
+      .card:nth-child(1) {
+        transform: rotateY(0deg) translateZ(350px);
+      }
+      .card:nth-child(2) {
+        transform: rotateY(72deg) translateZ(350px);
+      }
+      .card:nth-child(3) {
+        transform: rotateY(144deg) translateZ(350px);
+      }
+      .card:nth-child(4) {
+        transform: rotateY(216deg) translateZ(350px);
+      }
+      .card:nth-child(5) {
+        transform: rotateY(288deg) translateZ(350px);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .events {
+        height: 450px;
+        perspective: 700px;
+      }
+
+      .card {
+        width: 200px;
+        height: 280px;
+        margin-left: -100px;
+        margin-top: -140px;
+      }
+
+      .card:nth-child(1) {
+        transform: rotateY(0deg) translateZ(280px);
+      }
+      .card:nth-child(2) {
+        transform: rotateY(72deg) translateZ(280px);
+      }
+      .card:nth-child(3) {
+        transform: rotateY(144deg) translateZ(280px);
+      }
+      .card:nth-child(4) {
+        transform: rotateY(216deg) translateZ(280px);
+      }
+      .card:nth-child(5) {
+        transform: rotateY(288deg) translateZ(280px);
+      }
+
+      section h2 {
+        font-size: 2rem;
+      }
+    }
+
+    .card h3 {
+      color: #facc15;
+      margin-bottom: 10px;
+      text-shadow:
+        0 0 10px rgba(250,204,21,0.7),
+        0 0 25px rgba(250,204,21,0.4);
+    }
+
+    .card-image {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      filter: brightness(1.1) contrast(1.1);
+      box-shadow:
+        0 0 15px rgba(250,204,21,0.3),
+        0 0 30px rgba(250,204,21,0.15);
+      transition: transform 0.5s ease;
+    }
+
+    .card:hover .card-image {
+      transform: scale(1.08);
+    }
+
+    /* ---------- FOOTER ---------- */
+    footer {
+      background: linear-gradient(135deg, #e1ba0d 0%, #ae8a06 50%, #4a4f57 100%);
+      backdrop-filter: blur(10px);
+      border-top: 1px solid rgba(234,179,8,0.3);
+      padding: 50px 20px;
+      text-align: center;
+      box-shadow: inset 0 1px 30px rgba(192, 192, 192, 0.1);
+    }
+
+    footer p {
+      color: #888;
+      margin-top: 10px;
+    }
+
+    /* Responsive RMK Logo */
+    .rmk-logo {
+      position: absolute;
+      top: 1.5rem;
+      left: 1.5rem;
+      height: clamp(40px, 8vw, 80px);
+      width: auto;
+      z-index: 5;
+      max-width: 40%;
+      object-fit: contain;
+      filter: drop-shadow(0 0 8px rgba(192, 192, 192, 0.8)) 
+              drop-shadow(0 0 15px rgba(255, 255, 255, 0.6));
+    }
+
+    /* Glass morphism for map container */
+    .map-container {
+  max-width: 1400px;          /* wider on desktop */
+  margin: 0 auto;             /* center align */
+  padding: 25px;
+  background: radial-gradient(circle at top, #f36060, #000);
+  border-radius: 22px;
+
+  border: 2px solid rgba(250, 204, 21, 0.45);
+  box-shadow:
+    0 0 25px rgba(250, 204, 21, 0.25),
+    0 0 60px rgba(250, 204, 21, 0.15);
+}
+
+.map-container iframe {
+  width: 100%;
+  height: 550px;
+  border-radius: 16px;
+  border: none;
+}
+  </style>  
+</head>
+
+<body>
+
+<!-- MENU -->
+<button class="menu-btn" onclick="toggleMenu()">☰</button>
+<div class="menu" id="menu">
+  <button onclick="scrollToSection('home')">Home</button>
+  <button onclick="scrollToSection('events')">Events</button>
+  <button onclick="scrollToSection('register')">Register</button>
+  <button onclick="scrollToSection('route')">Route</button>
+</div>
+
+<!-- HERO -->
+<section class="hero visible" id="home">
+  <img 
+    src="https://www.rmkec.ac.in/2023/wp-content/themes/rmkec_v1/images/RMK_Engineering_College_logo.gif"
+    alt="RMK Engineering College Logo"
+    class="rmk-logo">
+
+  <video autoplay muted loop playsinline id="heroVideo">
+    <source src="background_browser.mp4" type="video/mp4">
+  </video>
+
+  <div class="hero-content">
+    <h1>R.M.K. ENGINEERING COLLEGE</h1>
+    <p>(AN AUTONOMOUS INSTITUTION)</p>
+
+    <div class="department">ROYAL MECH</div>
+    <h2>IMPULS '26</h2>
+    <div class="date">FEB 09, 2026</div>
+
+    <div class="countdown">
+      <div class="time-box"><div id="days">00</div><span>DAYS</span></div>
+      <div class="time-box"><div id="hours">00</div><span>HOURS</span></div>
+      <div class="time-box"><div id="minutes">00</div><span>MIN</span></div>
+      <div class="time-box"><div id="seconds">00</div><span>SEC</span></div>
+    </div>
+
+    <button class="btn" onclick="scrollToSection('register')">Register Now</button>
+  </div>
+</section>
+
+<!-- EVENTS -->
+<section id="events">
+  <h2>Events</h2>
+  <p>Technical & Non-Technical Events</p>
+
+  <div class="events">
+    <div class="carousel-container">
+
+    <!-- Event 1 -->
+    <div class="card">
+      <div class="card-inner">
+        <div class="card-face">
+          <img src="presentation.jpg" class="card-image">
+          <h3>Paper Exploro</h3>
+          <p>Research paper presentation</p>
+        </div>
+        <div class="card-face card-back">
+          <h3>Paper Exploro</h3>
+          <p>15 min presentation + Q&A</p>
+          <p>Rules</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Event 2 -->
+    <div class="card">
+      <div class="card-inner">
+        <div class="card-face">
+          <h3>MindKraft</h3>
+          <p>Project Expo</p>
+        </div>
+        <div class="card-face card-back">
+          <h3>MindKraft</h3>
+          <p>Prototype based event</p>
+          <p>Rules</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Event 3 -->
+    <div class="card">
+      <div class="card-inner">
+        <div class="card-face">
+          <img src="cognitiveimg.png" class="card-image">
+          <h3>Cognitive</h3>
+          <p>Technical Quiz</p>
+        </div>
+        <div class="card-face card-back">
+          <h3>Cognitive</h3>
+          <p>3 rounds • Individual</p>
+          <p>Rules</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Event 4 -->
+    <div class="card">
+      <div class="card-inner">
+        <div class="card-face">
+          <img src="cad.png" class="card-image">
+          <h3>CAD Modelling</h3>
+          <p>Technical Quiz</p>
+        </div>
+        <div class="card-face card-back">
+          <h3>CAD Modelling</h3>
+          <p>3 rounds • Individual</p>
+          <p>Rules</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Event 5 -->
+    <div class="card">
+      <div class="card-inner">
+        <div class="card-face">
+          <img src="iplaucton.png" class="card-image">
+          <h3>Mystery Maze</h3>
+          <p>Technical Quiz</p>
+        </div>
+        <div class="card-face card-back">
+          <h3>Mystery Maze</h3>
+          <p>3 rounds • Individual</p>
+          <p>Rules</p>
+        </div>
+      </div>
+    </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- REGISTER -->
+<section id="register">
+  <div class="orb"></div>
+  
+  <div class="registration-title">
+    <span>R</span><span>E</span><span>G</span><span>I</span><span>S</span><span>T</span><span>R</span><span>A</span><span>T</span><span>I</span><span>O</span><span>N</span>
+  </div>
+  
+  <p class="registration-subtitle">Secure your spot at IMPULS '26</p>
+
+  <div class="registration-box">
+    <!-- Deadline Box -->
+    <div class="deadline-box">
+      <p class="deadline-text">📅 Deadline: February 07, 2026</p>
+    </div>
+
+    <!-- Opportunity Text -->
+    <p class="opportunity-text">
+      Don't miss this opportunity to showcase your skills and innovation!
+    </p>
+
+    <!-- Registration Button -->
+    <div class="btn-container">
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSeuoF-Fs2zIe6njGSuEk4otXEVTvIgJ6-Trs_PKyeznpnkmAA/viewform?usp=dialog" target="_blank">
+        <button class="btn">Open Registration Form</button>
+      </a>
+    </div>
+
+    <!-- What Happens Next Box -->
+    <div class="next-steps-box">
+      <h3 class="next-steps-title">What Happens Next?</h3>
+      
+      <ul class="steps-list">
+        <li>
+          <div class="step-number">1</div>
+          <div class="step-text">
+            Fill out the registration form with your details and select your events.
+          </div>
+        </li>
+        <li>
+          <div class="step-number">2</div>
+          <div class="step-text">
+            Receive a confirmation email with your registration ID and event details.
+          </div>
+        </li>
+        <li>
+          <div class="step-number">3</div>
+          <div class="step-text">
+            Check your email for event schedules and guidelines before the symposium.
+          </div>
+        </li>
+        <li>
+          <div class="step-number">4</div>
+          <div class="step-text">
+            Arrive at the venue on February 09, 2026 with your registration ID.
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+</section>
+
+<!-- HOW TO REACH US -->
+<section id="route">
+  <h2>How to Reach Us</h2>
+  <p>RMK Engineering College – Kavaraipettai</p>
+
+  <div class="map-container">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3886.406234095885!2d80.10547907507682!3d13.146428987215108!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a5263a113a7b137%3A0xb01e51d9c947fb62!2sRMK%20Engineering%20College!5e0!3m2!1sen!2sin!4v1737021234567"
+      width="100%"
+      height="450"
+      style="border:0; border-radius:12px;"
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+
+    <div style="text-align:center; margin-top:20px;">
+      <a href="https://maps.app.goo.gl/1P9AUxzdDUgy5DJj9" target="_blank">
+        <button class="btn">Open in Google Maps</button>
+      </a>
+    </div>
+
+    <p style="margin-top:20px; color:#ccc; text-align:center;">
+      <strong>Address:</strong><br>
+      RSM Nagar, Kavaraipettai – 601206,<br>
+      Gummidipoondy Taluk, Thiruvallur District
+    </p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>Email: impuls26@rmkec.ac.in</p>
+  <p>Instagram: @impuls26_rmkec</p>
+  <p>© 2026 RMK Engineering College</p>
+</footer>
+
+<script>
+  /* MENU */
+  function toggleMenu() {
+    const m = document.getElementById("menu");
+    m.style.display = m.style.display === "flex" ? "none" : "flex";
+  }
+
+  function scrollToSection(id) {
+    document.getElementById(id).scrollIntoView();
+    document.getElementById("menu").style.display = "none";
+  }
+
+  /* SCROLL ANIMATION */
+  const observerOptions = {
+    threshold: 0.2,
+    rootMargin: '0px 0px -100px 0px'
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, observerOptions);
+
+  // Observe all sections except hero
+  document.querySelectorAll('section:not(.hero)').forEach(section => {
+    observer.observe(section);
+  });
+
+  /* VIDEO LOOP */
+  const video = document.getElementById("heroVideo");
+  if (video) {
+    video.loop = true;
+    
+    video.addEventListener("ended", function() {
+      this.currentTime = 0;
+      this.play();
+    }, false);
+    
+    setInterval(function() {
+      if (video.ended) {
+        video.currentTime = 0;
+        video.play();
+      }
+    }, 1000);
+    
+    video.play().catch(function(error) {
+      console.log("Autoplay failed, will play on user interaction");
+    });
+  }
+  
+  /* CARD FLIP */
+  const cards = document.querySelectorAll(".card");
+  cards.forEach(card => {
+    card.addEventListener("click", () => {
+      card.classList.toggle("flipped");
+    });
+  });
+
+  /* COUNTDOWN TIMER */
+  const target = new Date("2026-02-07T23:59:59").getTime();
+
+  function updateCountdown() {
+    const now = new Date().getTime();
+    const d = target - now;
+
+    if (d <= 0) {
+      document.getElementById("days").innerText = "00";
+      document.getElementById("hours").innerText = "00";
+      document.getElementById("minutes").innerText = "00";
+      document.getElementById("seconds").innerText = "00";
+      return;
+    }
+
+    const days = Math.floor(d / (1000*60*60*24));
+    const hours = Math.floor((d / (1000*60*60)) % 24);
+    const minutes = Math.floor((d / (1000*60)) % 60);
+    const seconds = Math.floor((d / 1000) % 60);
+
+    document.getElementById("days").innerText = String(days).padStart(2, '0');
+    document.getElementById("hours").innerText = String(hours).padStart(2, '0');
+    document.getElementById("minutes").innerText = String(minutes).padStart(2, '0');
+    document.getElementById("seconds").innerText = String(seconds).padStart(2, '0');
+  }
+
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+</script>
+
+</body>
+</html>
